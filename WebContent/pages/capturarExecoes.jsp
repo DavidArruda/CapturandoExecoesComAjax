@@ -15,7 +15,16 @@
 <script type="text/javascript">
 	
 	function testeExecao() {
-		alert($('#txtValor').val());
+		valorInformado = $('#txtValor').val();
+		
+		$.ajax({
+			method: "POST",
+			url: "capturarExecao", //para qual servlet
+			data: { valorParam: valorInformado } 
+		})
+		.always(function(response) { //sempre capta o retorno
+			alert(response);
+		});
 	}
 
 </script>
