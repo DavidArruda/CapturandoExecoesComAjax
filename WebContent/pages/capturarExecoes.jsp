@@ -22,8 +22,13 @@
 			url: "capturarExecao", //para qual servlet
 			data: { valorParam: valorInformado } 
 		})
-		.always(function(response) { //sempre capta o retorno
-			alert(response);
+		.done(function(response) { //ok nenhum erro
+			alert("Sucesso: " + response);
+			//Fazer algo
+		})
+		.fail(function(xhr,status, errorThrow) { //resposta erro algum problema ocorreu
+			alert("Erro: " + xhr.responseText);
+			//Fazer algo se der errado
 		});
 	}
 
