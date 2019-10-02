@@ -14,6 +14,11 @@
 			<td><a href="pages/capturarExecoes.jsp">Capturar Exeções</a> </td>
 		</tr>
 		
+		<tr>
+			<td><a href="pages/acessoAoSistema.jsp">Acessar Sistema</a> </td>
+		</tr>
+		
+		
 	</table>
 </body>
 </html>
