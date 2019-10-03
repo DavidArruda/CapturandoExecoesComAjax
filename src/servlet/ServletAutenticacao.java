@@ -24,6 +24,14 @@ public class ServletAutenticacao extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (Boolean.parseBoolean(request.getParameter("deslogar"))) {
+
+			HttpServletRequest req = (HttpServletRequest) request;
+			HttpSession session = req.getSession();
+			session.invalidate();
+			response.sendRedirect("../index.jsp");
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,22 +40,23 @@ public class ServletAutenticacao extends HttpServlet {
 
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
-		
+		String url = request.getParameter("url");
+
 		if (login.equals("admin") && senha.equals("admin")) {
-			
+
 			UserLogado logado = new UserLogado();
 			logado.setLogin(login);
 			logado.setSenha(senha);
-			
-			//adiciona Usuario logado a sessao
+
+			// adiciona Usuario logado a sessao
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpSession session = req.getSession();
 			session.setAttribute("usuario", logado);
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/acessoAoSistema.jsp");
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 
-		}else { //redireciona para a pagina login novamente
+		} else { // redireciona para a pagina login novamente
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/autenticar.jsp");
 			dispatcher.forward(request, response);
 		}
