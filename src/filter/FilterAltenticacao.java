@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import user.UserLogado;
 
-@WebFilter(urlPatterns = { "/pages/acessoAoSistema.jsp" })
+@WebFilter(urlPatterns = { "/pages/*" })
 public class FilterAltenticacao implements Filter {
 
 	// Faz alguma coisa quando a aplicação é derrubada
@@ -31,11 +31,14 @@ public class FilterAltenticacao implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
+		
+		String urlParaAutenticar = req.getServletPath();
+		
 		UserLogado userLogado = (UserLogado) session.getAttribute("usuario");
 		
 		//Retorna null caso não esteja logado
-		if (userLogado == null) {//Usuário não logado
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/pages/autenticar.jsp");
+		if (userLogado == null && !urlParaAutenticar.equalsIgnoreCase("/pages/ServletAutenticacao")) {//Usuário não logado
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/autenticar.jsp?url="+urlParaAutenticar);
 			dispatcher.forward(request, response);
 			return;
 		}
