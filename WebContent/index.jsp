@@ -19,6 +19,10 @@
 		</tr>
 		
 		<tr>
+			<td><a href="pages/paginaPai.jsp">Load Jquery</a> </td>
+		</tr>
+		
+		<tr>
 			<td><a href="pages/ServletAutenticacao?deslogar=true">Deslogar</a> </td>
 		</tr>
 		
