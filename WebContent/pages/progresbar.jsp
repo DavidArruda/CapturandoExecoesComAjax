@@ -26,7 +26,7 @@
 }
 
 .ui-progressbar{
-	position: :relative;
+	position: : relative;
 }
 
 .progress-label{
@@ -54,15 +54,45 @@
 	
 	<br/>
 	
-	<h1>Progressp com jQuery</h1>
+	<h1>Progressbar com jQuery</h1>
 	
 	<div id="progressbar">
 		<div class="progress-label" >
-			
+			Carregando...
 		</div>
 	</div>
+	
+	<script type="text/javascript"> 	
+	
+	$(function() {
+		var progressbar = $("#progressbar"), progresslabel = $(".progress-label");
 		
-	<script type="text/javascript">
+		progressbar.progressbar ({
+			value : false,
+			change : function () {
+				progresslabel.text (progressbar.progressbar('value') + "%");
+			},
+			complete  : function() {
+				progresslabel.text('Completo!');
+			}
+		});
+		
+		function progress() {
+			var val = progressbar.progressbar("value") || 0;
+			
+			progressbar.progressbar("value", val + 2);
+			
+			if (val < 99) {
+				setTimeout(progress, 80);
+			}
+		}
+		
+		setTimeout(progress, 2000);
+		
+	});
+	
+	
+	// barra de progresso com javaScript
 		function exibirBarra() {
 			var elem = document.getElementById("myBar");
 			var width = 1;
