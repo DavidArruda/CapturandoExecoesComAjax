@@ -27,6 +27,10 @@
 		</tr>
 		
 		<tr>
+			<td><a href="pages/datas.jsp">Datas</a> </td>
+		</tr>
+		
+		<tr>
 			<td><a href="pages/ServletAutenticacao?deslogar=true">Deslogar</a> </td>
 		</tr>
 		
