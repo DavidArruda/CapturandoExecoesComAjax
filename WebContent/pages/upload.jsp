@@ -25,26 +25,28 @@
 
 		reader.onloadend = function() {
 			target.src = reader.result;
-		};
 
-		if (file) {
-			reader.readAsDataURL(file);
-			
 			//Upload Ajax
 			$.ajax({
-				method: "POST",
-				url: "fileUpload", //para qual servlet
-				data: { fileUpload: target.src } 
-			})
-			.done(function(response) { //ok nenhum erro
+				method : "POST",
+				url : "fileUpload", //para qual servlet
+				data : {
+					fileUpload : reader.result
+				}
+			}).done(function(response) { //ok nenhum erro
 				alert("Sucesso: " + response);
 				//Fazer algo
-			})
-			.fail(function(xhr,status, errorThrow) { //resposta erro algum problema ocorreu
+			}).fail(function(xhr, status, errorThrow) { //resposta erro algum problema ocorreu
 				alert("Erro: " + xhr.responseText);
 				//Fazer algo se der errado
 			});
-			
+
+		};
+
+		if (file) {
+
+			reader.readAsDataURL(file);
+
 		} else {
 			target.src = "";
 		}

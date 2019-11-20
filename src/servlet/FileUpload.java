@@ -7,35 +7,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class FileUpload
- */
-@WebServlet("/FileUpload")
+import dao.DaoImagem;
+
+@WebServlet("/pages/fileUpload")
 public class FileUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public FileUpload() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	
+	DaoImagem daoImagem = new DaoImagem();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public FileUpload() {
+		super();
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		
+		try {
+			
+		
+		// usar variavel fileupload para salvar no banco
+		String fileUpload = request.getParameter("fileUpload");
+		System.out.println(fileUpload);
+		
+		daoImagem.gravarImagem(fileUpload);
+		
+		response.getWriter().write("Upload realizado com sucesso");
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
 	}
 
 }
