@@ -13,29 +13,34 @@
 </head>
 <body>
 
-		<input type="file" id="file" name="file" onchange="uploadFile();">
-		<img alt="Imagem" src="" id="target" width="200px" height="200px">
+<form enctype="application/x-www-form-urlencoded">
+	<input type="file" id="file" name="file" onchange="uploadFile();" />
+	<img alt="Imagem" id="target" width="200" height="200">
+	</form>
+	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<a href="fileUpload?acao=carregar">Carregar imagens</a>
 
-	
-	<br/>
-	<br/>
-	<br/>
-	<br/>
-	
-	<a href="fileUpload?acao=carregar">Carregar Imagens</a>
-	
+  <form action="fileUpload" method="get">	
 	<table>
-		<c:forEach items="${listaUserImagem}" var="user">
-			<tr>
-				<td>${user.codImagem}</td>
-				<td>${user.imagem}</td>
-				<td><a target="_blank" href="fileUpload?acao=download&codImagem=${user.codImagem}">Download Imagem</a></td>		
-			</tr>
-		
-		</c:forEach>
+	<c:forEach items="${listaUserImagem}" var="user">
+	   <tr>
+	    <td>${user.codImagem}</td>
+	    <td>${user.tipoFile}</td>
+	    <td><a target="_blank" href="fileUpload?acao=download&iduser=${user.codImagem}">Download Arquivo</a> </td>
+	   </tr>
+	</c:forEach>
 	</table>
-
+</form>
 	
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+
 </body>
 
 <script type="text/javascript">

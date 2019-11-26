@@ -15,12 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import dao.DaoImagem;
+import entidades.BeanImagem;
 
 @WebServlet("/pages/fileUpload")
 public class FileUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	DaoImagem daoImagem = new DaoImagem();
+	BeanImagem imagem = new BeanImagem();
 
 	public FileUpload() {
 		super();
@@ -30,53 +32,51 @@ public class FileUpload extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		try {
-
+try {
+			
 			String acao = request.getParameter("acao");
-
-			if (acao.equalsIgnoreCase("carregar")) {
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher("upload.jsp");
+			
+			if (acao.equalsIgnoreCase("carregar")){
+				
+				RequestDispatcher viDispatcher = request.getRequestDispatcher("upload.jsp");
 				request.setAttribute("listaUserImagem", daoImagem.listar());
-				dispatcher.forward(request, response);
-
-			} else if (acao.equalsIgnoreCase("download")) {
-
-				String codImagem = request.getParameter("codImagem");
-				String imagem = daoImagem.buscarImagem(codImagem);
-
-				if (imagem != null) {
+				viDispatcher.forward(request, response);
+				
+			}else if (acao.equalsIgnoreCase("download")){
+				String iduser = request.getParameter("iduser");
+				BeanImagem imagem = daoImagem.buscarImagem(iduser);
+				if (imagem != null){
 					
-					response.setHeader("Content-disposition","attachment;file-name-imagem.png");
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo." + imagem.getTipoFile());
 
-					// Pega a base64 sem o contentType
-					String imagemPura = imagem.split(",")[1];
-
-					// converte base64 em bytes
-					byte[] imagemBytes = new Base64().decode(imagemPura);
-
-					// coloca os bytes em um objeto de entrada para processar
-					InputStream is = new ByteArrayInputStream(imagemBytes);
-
-					// inicio - escrever os dados na resposta
+					/*Pega somente imagem pura*/
+					String imagemPura = imagem.getImagem().split(",")[1];
+					
+					/*Converte base 64 em bytes*/
+					byte [] imageBytes = new Base64().decodeBase64(imagemPura);
+					
+					/*Coloca os bytes em um objetos de entrada para processar*/
+					InputStream is = new ByteArrayInputStream(imageBytes);
+					
+					/*INICIO - Escrever dados da resposta*/
 					int read = 0;
 					byte[] bytes = new byte[1024];
-
 					OutputStream os = response.getOutputStream();
-
-					while ((read = is.read(bytes)) != -1) {
+					
+					while ( (read = is.read(bytes)) != -1){
 						os.write(bytes, 0, read);
 					}
-
+					
 					os.flush();
 					os.close();
-
-					// fim escrever os dados na resposta
-
+					
+					/*FIM - Escrever dados da resposta*/
+					
 				}
 			}
 
-		} catch (Exception e) {
+		
+		}catch (Exception e){
 			e.printStackTrace();
 		}
 	}
