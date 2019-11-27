@@ -31,6 +31,10 @@
 		</tr>
 		
 		<tr>
+			<td><a href="pages/datatable.jsp">Data Table jQuery</a> </td>
+		</tr>
+		
+		<tr>
 			<td><a href="pages/datas.jsp">Datas</a> </td>
 		</tr>
 		
