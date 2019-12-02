@@ -17,12 +17,9 @@
 <table id="minhatabela" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>Código usuário</th>
+                <th>Nome</th>
+
             </tr>
         </thead>
     </table> 

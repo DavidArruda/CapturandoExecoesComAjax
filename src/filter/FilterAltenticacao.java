@@ -1,6 +1,7 @@
 package filter;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -13,15 +14,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import connection.SingleConnection;
 import user.UserLogado;
 
 @WebFilter(urlPatterns = { "/pages/*" })
 public class FilterAltenticacao implements Filter {
+	
+	private static Connection connection;
 
 	// Faz alguma coisa quando a aplicação é derrubada
 	@Override
 	public void destroy() {
-
+		connection = SingleConnection.getConnection();
 	}
 
 	// Intercepta todas as requisições
