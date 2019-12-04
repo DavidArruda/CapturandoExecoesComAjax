@@ -15,17 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import connection.SingleConnection;
+import connection.SingleConnection2;
+import connection.SingleConnectionMysql;
 import user.UserLogado;
 
 @WebFilter(urlPatterns = { "/pages/*" })
 public class FilterAltenticacao implements Filter {
 	
 	private static Connection connection;
+	private static Connection connection2;
+	private static Connection connectionMysql;
 
 	// Faz alguma coisa quando a aplicação é derrubada
 	@Override
 	public void destroy() {
-		connection = SingleConnection.getConnection();
+		
 	}
 
 	// Intercepta todas as requisições
@@ -58,6 +62,10 @@ public class FilterAltenticacao implements Filter {
 	// Executa alguma coisa quando a aplicação é executada
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		
+		connection = SingleConnection.getConnection();
+		connection2 = SingleConnection2.getConnection();
+		connectionMysql = SingleConnectionMysql.getConnection();
 
 	}
 

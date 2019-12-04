@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
-Realiza conexao com o banco postgreSQL2
+Realiza conexao com o banco postgreSQL
  */
 
-public class SingleConnection {
+public class SingleConnection2 {
 	
-	private static String banco = "jdbc:postgresql://localhost:5432/curso-jsp?autoReconnect=true";
+	private static String banco = "jdbc:postgresql://localhost:5432/datas?autoReconnect=true";
 	private static String password = "admin";
 	private static String user = "postgres";
 	private static Connection connection = null;
@@ -18,7 +18,7 @@ public class SingleConnection {
 		conectar();
 	}
 
-	public SingleConnection() {
+	public SingleConnection2() {
 		conectar();
 	}
 
