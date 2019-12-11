@@ -23,7 +23,7 @@ public class RelatorioService implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final String FOLDER_RELATORIOS = "/relatorios";
+	private static final String FOLDER_RELATORIOS = "/WEB-INF/classes/relatorios";
 	private static final String SUBREPORT_DIR = "SUBREPORT_DIR";
 	private String SEPARETOR = File.separator;
 	private String caminhoArquivoRelatorio = null;
@@ -43,8 +43,8 @@ public class RelatorioService implements Serializable{
 		File file = new File(caminhoRelatorio + SEPARETOR + nomeRelatorioJasper + ".jasper" );
 		
 		if (caminhoRelatorio == null
-				|| caminhoRelatorio != null && caminhoRelatorio.isEmpty()
-				|| file.exists()){
+				|| (caminhoRelatorio != null && caminhoRelatorio.isEmpty())
+				|| !file.exists()){
 			caminhoRelatorio = this.getClass().getResource(FOLDER_RELATORIOS).getPath();
 			SEPARETOR = "";
 		}
@@ -85,5 +85,4 @@ public class RelatorioService implements Serializable{
 		
 		return caminhoArquivoRelatorio;
 	}
-	
 }
