@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import connection.SingleConnection;
+import connection.SingleConnection2;
 import entidades.Usuario;
 
 public class DaoUsuario {
@@ -15,7 +16,7 @@ public class DaoUsuario {
 	private Connection connection;
 	
 	public DaoUsuario() {
-		connection = SingleConnection.getConnection();
+		connection = SingleConnection2.getConnection();
 	}
 	
 	/** lista os usuários do banco */
