@@ -10,8 +10,8 @@
 	
 	<h1>Relátorios</h1>
 	
-	<a href="ServletDownloadFile?tipoExportar=PDF">PDF</a>
-	<a href="ServletDownloadFile?tipoExportar=EXEL">Exel</a>
+	<a href="ServletDownloadFile?tipoExportar=pdf">PDF</a>
+	<a href="ServletDownloadFile?tipoExportar=xls">Exel</a>
 	
 </body>
 </html>

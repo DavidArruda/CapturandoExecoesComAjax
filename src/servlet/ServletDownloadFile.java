@@ -49,7 +49,7 @@ public class ServletDownloadFile extends HttpServlet {
 			List<Usuario> usuarios = daoUsuario.getsuarios();
 
 			String fileUrl = relatorioService.gerarRelatorio(usuarios, new HashMap(), "rel_usuario", "rel_usuario",
-					context);
+					context, tipoExportar);
 
 			// Construir o caminho completo e absoluto do arquivo
 			File downloadFile = new File(fileUrl);

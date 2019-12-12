@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 public class RelatorioService implements Serializable{
@@ -32,7 +33,7 @@ public class RelatorioService implements Serializable{
 	private File arquivoGerado = null; 
 	
 	public String gerarRelatorio(List<?> lisDataBeanCollection, HashMap parametrosRelatorio,
-			String nomeRelatorioJasper, String nomeRelatorioSaida, ServletContext servletContext) throws Exception {
+			String nomeRelatorioJasper, String nomeRelatorioSaida, ServletContext servletContext, String tipoExportar) throws Exception {
 		
 		/*cria a lista de collectionDataSource de beans que carregam os dados para o relatorio */
 		JRBeanCollectionDataSource jrbcds = new JRBeanCollectionDataSource(lisDataBeanCollection);
@@ -65,10 +66,15 @@ public class RelatorioService implements Serializable{
 		//carrega o arquivo
 		JasperPrint impressoraJasper = JasperFillManager.fillReport(relatorioJasper, parametrosRelatorio, jrbcds);
 		
-		exporter = new JRPdfExporter();
+		if (tipoExportar.equalsIgnoreCase("PDF")) {
+			exporter = new JRPdfExporter();
+			
+		}else if (tipoExportar.equalsIgnoreCase("xls")) {
+			exporter = new JRXlsExporter();
+		}
 		
 		//Caminho do relatorio exportado
-		caminhoArquivoRelatorio = caminhoRelatorio + SEPARETOR + ".pdf";
+		caminhoArquivoRelatorio = caminhoRelatorio + SEPARETOR + nomeRelatorioSaida + "." + tipoExportar;
 		
 		//criar novo arquivo exportado
 		arquivoGerado = new File(caminhoArquivoRelatorio);
