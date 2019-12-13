@@ -9,7 +9,7 @@ import java.util.List;
 
 import connection.SingleConnection2;
 import entidades.Evento;
-import entidades.Usuario;
+
 
 public class DaoEvento {
 	
