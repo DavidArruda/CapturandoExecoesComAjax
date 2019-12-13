@@ -46,6 +46,10 @@
 			<td><a href="pages/relatorios.jsp">Relatórios</a> </td>
 		</tr>
 		
+		<tr>
+			<td><a href="pages/calendar.jsp">Calendário</a> </td>
+		</tr>
+		
 		
 	</table>
 </body>
