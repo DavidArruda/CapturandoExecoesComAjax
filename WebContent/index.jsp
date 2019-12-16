@@ -50,6 +50,10 @@
 			<td><a href="pages/calendar.jsp">Calendário</a> </td>
 		</tr>
 		
+		<tr>
+			<td><a href="pages/ganttview.jsp">Gantt View</a> </td>
+		</tr>
+		
 		
 	</table>
 </body>
