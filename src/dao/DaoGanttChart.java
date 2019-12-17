@@ -3,7 +3,6 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,50 +13,56 @@ import entidades.Series;
 public class DaoGanttChart {
 
 	private Connection connection;
-	
+
 	public DaoGanttChart() {
 		connection = SingleConnection2.getConnection();
 	}
-	
-	
-	/** lista os usuários do banco */
-	public List<Projeto> getProjetos() throws SQLException{
-		
+
+	public void atualizar(Series series) throws Exception {
+
+		String sqlUpdate = "update series set datainicial = '"
+				+ series.getDatainicial() + "' , datafinal = '"
+				+ series.getDatafinal() + "' " + "where id = " + series.getId()
+				+ " and projeto = " + series.getProjeto();
+		connection.prepareStatement(sqlUpdate).executeUpdate();
+	}
+
+	public List<Projeto> getProjetos() throws Exception {
 		List<Projeto> projetos = new ArrayList<Projeto>();
-		
-		String sql = "select * from projeto";
-		PreparedStatement statement = connection.prepareStatement(sql);
-		ResultSet resultSet = statement.executeQuery();
-		
-		while(resultSet.next()) {
-			
+
+		String sqlProjetos = "select * from projeto";
+		PreparedStatement statementProjeto = connection
+				.prepareStatement(sqlProjetos);
+		ResultSet resultSetProjetos = statementProjeto.executeQuery();
+
+		while (resultSetProjetos.next()) {
 			Projeto projeto = new Projeto();
-			projeto.setCodProjeto(resultSet.getLong("codProjeto"));
-			projeto.setNome(resultSet.getString("nome"));
-			
-			String sqlSeries = "select * from series where projeto = " + resultSet.getLong("codProjeto");
-			PreparedStatement statementSeries = connection.prepareStatement(sqlSeries);
-			ResultSet resultSetSeries = statementSeries.executeQuery();
-			
-			List<Series> listaSeries = new ArrayList<Series>();
-			
-			while(resultSetSeries.next()) {
-				Series series = new Series();
-				
-				series.setCodSeries(resultSetSeries.getLong("codSeries"));
-				series.setNome(resultSetSeries.getString("nome"));
-				series.setDataFinal(resultSetSeries.getString("dataInicial"));
-				series.setDataFinal(resultSetSeries.getString("dataFinal"));
-				series.setProjeto(resultSetSeries.getLong("projeto"));
-				
-				listaSeries.add(series);
+			projeto.setId(resultSetProjetos.getLong("id"));
+			projeto.setNome(resultSetProjetos.getString("nome"));
+
+			String sqlSeries = "select * from series where projeto = "
+					+ resultSetProjetos.getLong("id");
+			PreparedStatement preparedStatementSerie = connection
+					.prepareStatement(sqlSeries);
+			ResultSet resultSetSeries = preparedStatementSerie.executeQuery();
+			List<Series> series = new ArrayList<Series>();
+
+			while (resultSetSeries.next()) {
+				Series serie = new Series();
+				serie.setId(resultSetSeries.getLong("id"));
+				serie.setNome(resultSetSeries.getString("nome"));
+				serie.setProjeto(resultSetSeries.getLong("projeto"));
+				serie.setDatainicial(resultSetSeries.getString("datainicial"));
+				serie.setDatafinal(resultSetSeries.getString("datafinal"));
+
+				series.add(serie);
 			}
-			
-			projeto.setListaSeries(listaSeries);
+			projeto.setSeries(series);
+
+			projetos.add(projeto);
 		}
-		
+
 		return projetos;
-		
 	}
 
 }

@@ -9,14 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dao.DaoGanttChart;
 import entidades.Projeto;
+import entidades.Series;
 
+/**
+ * Servlet implementation class BuscarDatasPlanejamento
+ */
 @WebServlet("/pages/buscarDatasPlanejamento")
 public class BuscarDatasPlanejamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	DaoGanttChart daoGanttChart = new DaoGanttChart();
+
+	private DaoGanttChart daoGanttChart = new DaoGanttChart();
 
 	public BuscarDatasPlanejamento() {
 		super();
@@ -30,20 +36,32 @@ public class BuscarDatasPlanejamento extends HttpServlet {
 			List<Projeto> projetos = daoGanttChart.getProjetos();
 
 			if (!projetos.isEmpty()) {
-				//String grantJson = new Gson().toJson(projetos);
+				String grantJson = new Gson().toJson(projetos);
 
 				response.setStatus(200);
-				//response.getWriter().write(grantJson);
+				response.getWriter().write(grantJson);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		try {
+			Series seriesUpdate = new Series();
+
+			seriesUpdate.setId(Long.parseLong(request.getParameter("serie")));
+			seriesUpdate.setProjeto(Long.parseLong(request.getParameter("projeto")));
+			seriesUpdate.setDatainicial(request.getParameter("start"));
+			seriesUpdate.setDatafinal(request.getParameter("end"));
+
+			daoGanttChart.atualizar(seriesUpdate);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

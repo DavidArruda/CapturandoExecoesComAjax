@@ -5,25 +5,25 @@ import java.util.List;
 
 public class Projeto {
 
-	private Long codProjeto;
+	private Long id;
 	private String nome;
-	
-	private List<Series> listaSeries = new ArrayList<Series>();
-	
-	public List<Series> getListaSeries() {
-		return listaSeries;
-	}
-	
-	public void setListaSeries(List<Series> listaSeries) {
-		this.listaSeries = listaSeries;
-	}
-	
-	public Long getCodProjeto() {
-		return codProjeto;
+
+	private List<Series> series = new ArrayList<Series>();
+
+	public void setSeries(List<Series> series) {
+		this.series = series;
 	}
 
-	public void setCodProjeto(Long codProjeto) {
-		this.codProjeto = codProjeto;
+	public List<Series> getSeries() {
+		return series;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {

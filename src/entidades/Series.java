@@ -1,36 +1,44 @@
 package entidades;
 
 public class Series {
-	
-	private Long codSeries;
+
+	private Long id;
 	private String nome;
-	private String dataInicial;
-	private String dataFinal;
-	
+	private String datainicial;
+	private String datafinal;
+
 	private Long projeto;
 
-	public Long getCodSeries() {
-		return codSeries;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCodSeries(Long codSeries) {
-		this.codSeries = codSeries;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getDataInicial() {
-		return dataInicial;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDataInicial(String dataInicial) {
-		this.dataInicial = dataInicial;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getDataFinal() {
-		return dataFinal;
+	public String getDatainicial() {
+		return datainicial;
 	}
 
-	public void setDataFinal(String dataFinal) {
-		this.dataFinal = dataFinal;
+	public void setDatainicial(String datainicial) {
+		this.datainicial = datainicial;
+	}
+
+	public String getDatafinal() {
+		return datafinal;
+	}
+
+	public void setDatafinal(String datafinal) {
+		this.datafinal = datafinal;
 	}
 
 	public Long getProjeto() {
@@ -41,11 +49,4 @@ public class Series {
 		this.projeto = projeto;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 }

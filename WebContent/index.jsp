@@ -51,7 +51,7 @@
 		</tr>
 		
 		<tr>
-			<td><a href="pages/ganttview.jsp">Gantt View</a> </td>
+			<td><a href="pages/ganttView.jsp">Gantt View</a> </td>
 		</tr>
 		
 		
